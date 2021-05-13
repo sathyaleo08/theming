@@ -6,13 +6,12 @@
   padding-bottom: $bottom;
   padding-left: $left;
 }
-$spacing: 8px;
-.testing {
-  width: #{$spacing * 2};
+@function spacing() {
+  @return var(--theme-spacing) * 8+"px";
 }
+
 .card {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-  max-width: 300px;
   background-color: var(--light-bg);
   border-radius: var(--theme-border-radius);
   // border: 0.0625rem solid var(--theme-primary-700);
@@ -29,7 +28,7 @@ $spacing: 8px;
   ); */
 
   .card-header {
-    padding: #{$spacing * 2} #{$spacing * 4};
+    padding: calc(var(--theme-spacing) * 2) calc(var(--theme-spacing) * 3);
     border-bottom: 1px solid var(--theme-primary-700);
     border-top-left-radius: var(--theme-border-radius);
     border-top-right-radius: var(--theme-border-radius);
@@ -45,14 +44,13 @@ $spacing: 8px;
     flex: 1;
     -ms-flex: 1 1 auto;
     overflow: auto;
-    padding: 16px 24px;
+    padding: calc(var(--theme-spacing) * 2) calc(var(--theme-spacing) * 3);
     position: relative;
     color: var(--theme-primary-contrast-50);
     font-weight: 400;
   }
   .card-footer {
-    // padding: 16px 24px;
-    @include padding(16px, 24px, 16px, 24px);
+    padding: calc(var(--theme-spacing) * 2) calc(var(--theme-spacing) * 3);
     border-top: 1px solid var(--theme-primary-700);
     color: var(--theme-primary-A700);
     font-style: italic;

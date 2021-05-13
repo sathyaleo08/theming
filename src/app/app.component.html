@@ -12,11 +12,7 @@
         </div>
       </div>
     </div>
-    <div class="col-xs-3">
-      <h2 class="Monoton">Sample Font</h2>
-      <h2 class="DroidSans">Sample Font</h2>
-      <h2 class="Montserrat">Sample Font</h2>
-    </div>
+    <div class="col-xs-3"></div>
     <div class="col-xs-3"></div>
     <div class="col-xs-3">
       <button class="raised" (click)="generateJSON()">Download Config</button>
@@ -25,18 +21,18 @@
 
   <div class="row">
     <div class="col-xs-4">
-      <div>Border Radius</div>
+      <h3>Border Radius</h3>
       <ngx-slider
         [(value)]="sliderValue"
         [options]="sliderOptions"
         (valueChange)="sliderChange($event)"
       ></ngx-slider>
-      <!-- <div>Border Radius</div>
+      <h3>Spacing</h3>
       <ngx-slider
         [(value)]="sliderValueSpacing"
         [options]="sliderOptionsSpacing"
         (valueChange)="sliderChangeSpacing($event)"
-      ></ngx-slider> -->
+      ></ngx-slider>
     </div>
     <div class="col-xs-4">
       <form [formGroup]="form">
@@ -74,7 +70,7 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-6">
+    <div class="col-xs-4">
       <h2>Card</h2>
       <div class="card" [ngClass]="buttonClass">
         <div class="card-header">Curabitur consequat</div>
@@ -86,12 +82,12 @@
         <div class="card-footer">Etiam venenatis</div>
       </div>
     </div>
-    <div class="col-xs-6">
+    <div class="col-xs-4">
       <h2>Button</h2>
       <div>
-        <button [ngClass]="buttonClass" class="raised">lobortis</button>
-        <button [ngClass]="buttonClass" class="stroked">lobortis</button>
-        <button [ngClass]="buttonClass" class="flat">lobortis</button>
+        <button [ngClass]="buttonClass" class="raised">Raised</button>
+        <button [ngClass]="buttonClass" class="stroked">stroked</button>
+        <button [ngClass]="buttonClass" class="flat">Flat</button>
       </div>
     </div>
   </div>
