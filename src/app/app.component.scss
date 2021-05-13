@@ -1,0 +1,51 @@
+@import "../assets/styles/variables";
+
+.wrapper {
+  margin: 0 auto;
+  padding: 5px;
+}
+// Styles for Palette
+.palette {
+  div {
+    height: 36px;
+    font-family: "Open Sans", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 36px;
+    padding: 3px 10px;
+  }
+  span {
+    font-size: 12px;
+  }
+}
+.smallPalette {
+  width: 230px;
+  div {
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+  }
+}
+.colorBox {
+  background-color: var(--theme-primary-500);
+  color: var(--theme-primary-contrast-500);
+}
+.picker {
+  height: 36px;
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 36px;
+  border: none;
+  outline: 0;
+  padding: 3px 10px;
+  cursor: pointer;
+  font-weight: 400;
+}
+h2.Monoton {
+  font-family: "Monoton", Arial, sans-serif;
+}
+h2.DroidSans {
+  font-family: "Droid Sans", Arial, sans-serif;
+}
+h2.Montserrat {
+  font-family: "Montserrat", Arial, sans-serif;
+}

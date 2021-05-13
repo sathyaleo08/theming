@@ -1,0 +1,187 @@
+<div class="wrapper">
+  <div class="row">
+    <div class="col-xs-2">
+      <div>
+        <div class="colorBox"></div>
+        <div>Primary</div>
+        <div class="smallPalette">
+          <div
+            *ngFor="let color of primaryColorPalette"
+            [style.background-color]="color.hex"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3">
+      <h2 class="Monoton">Sample Font</h2>
+      <h2 class="DroidSans">Sample Font</h2>
+      <h2 class="Montserrat">Sample Font</h2>
+    </div>
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3">
+      <button class="raised" (click)="generateJSON()">Download Config</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-4">
+      <div>Border Radius</div>
+      <ngx-slider
+        [(value)]="sliderValue"
+        [options]="sliderOptions"
+        (valueChange)="sliderChange($event)"
+      ></ngx-slider>
+      <!-- <div>Border Radius</div>
+      <ngx-slider
+        [(value)]="sliderValueSpacing"
+        [options]="sliderOptionsSpacing"
+        (valueChange)="sliderChangeSpacing($event)"
+      ></ngx-slider> -->
+    </div>
+    <div class="col-xs-4">
+      <form [formGroup]="form">
+        <span>Color: </span>
+        <label>
+          <input
+            type="radio"
+            value="primary"
+            formControlName="variant"
+            (change)="changeVariant($event)"
+          />
+          <span>Primary</span>
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="secondary"
+            formControlName="variant"
+            (change)="changeVariant($event)"
+          />
+          <span>Secondary</span>
+        </label>
+      </form>
+      <span>Dark Mode</span>
+      <label class="switch">
+        <input
+          type="checkbox"
+          value="darkmode"
+          (change)="switchDarkMode($event)"
+        />
+        <span class="slider round"></span>
+      </label>
+    </div>
+    <div class="col-xs-4"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <h2>Card</h2>
+      <div class="card" [ngClass]="buttonClass">
+        <div class="card-header">Curabitur consequat</div>
+        <div class="card-body">
+          Donec volutpat arcu quis nulla pellentesque pharetra. Sed lorem massa,
+          fringilla non augue rutrum, malesuada sollicitudin metus. Vivamus
+          lobortis ornare mi, commodo consequat purus congue nec.
+        </div>
+        <div class="card-footer">Etiam venenatis</div>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <h2>Button</h2>
+      <div>
+        <button [ngClass]="buttonClass" class="raised">lobortis</button>
+        <button [ngClass]="buttonClass" class="stroked">lobortis</button>
+        <button [ngClass]="buttonClass" class="flat">lobortis</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2">
+      <div class="Picker">
+        <div class="palette">
+          <p>Primary Color</p>
+          <input
+            type="text"
+            class="picker"
+            [(colorPicker)]="primaryColor"
+            [(ngModel)]="primaryColor"
+            (colorPickerChange)="primaryColorChange($event)"
+          />
+          <p>Primary Color Palette</p>
+          <div
+            *ngFor="let color of primaryColorPalette"
+            [style.background-color]="color.hex"
+            [style.color]="color.darkContrast ? 'black' : 'white'"
+          >
+            {{ color.name }} <span> {{ color.hex }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-2">
+      <div class="PickerSec">
+        <div class="palette">
+          <p>Secondary Color</p>
+          <input
+            class="picker"
+            type="text"
+            [(colorPicker)]="secondaryColor"
+            [(ngModel)]="secondaryColor"
+            (colorPickerChange)="secondaryColorChange($event)"
+          />
+          <p>Secondary Color Palette</p>
+          <div
+            *ngFor="let color of secondaryColorPalette"
+            [style.background-color]="color.hex"
+            [style.color]="color.darkContrast ? 'black' : 'white'"
+          >
+            {{ color.name }} <span> {{ color.hex }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-2">Accent</div>
+    <div class="col-xs-2">
+      <input
+        [(colorPicker)]="backgroundColor"
+        [cpColorMode]="'grayscale'"
+        [style.background]="backgroundColor"
+      />
+    </div>
+  </div>
+  <h2>Mater Color Combination</h2>
+  <div class="row">
+    <div class="col-xs-2">
+      <div class="palette">
+        <p>Primary Color Palette</p>
+        <div
+          *ngFor="let color of primaryPaletterArr"
+          [style.background-color]="color.hex"
+          [style.color]="color.contrastText"
+        >
+          <span> {{ color.hex }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-2">
+      <div class="palette">
+        <p>Secondary Color Palette</p>
+        <div
+          *ngFor="let color of secPaletterArr"
+          [style.background-color]="color.hex"
+          [style.color]="color.contrastText"
+        >
+          <span> {{ color.hex }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4"></div>
+    <div class="col-xs-2"></div>
+  </div>
+  <h2>TypoGraphy Test - Web Font loader</h2>
+  <div class="row">
+    <div class="col-xs-8">
+      <app-typography></app-typography>
+    </div>
+  </div>
+</div>

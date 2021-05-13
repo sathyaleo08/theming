@@ -1,0 +1,82 @@
+@import "variables";
+// Cards
+@mixin padding($top, $right, $bottom, $left) {
+  padding-top: $top;
+  padding-right: $right;
+  padding-bottom: $bottom;
+  padding-left: $left;
+}
+$spacing: 8px;
+.testing {
+  width: #{$spacing * 2};
+}
+.card {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  max-width: 300px;
+  background-color: var(--light-bg);
+  border-radius: var(--theme-border-radius);
+  // border: 0.0625rem solid var(--theme-primary-700);
+  font-family: Open Sans, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  margin-bottom: 1.875rem;
+  /*  background: var(--theme-primary-50);
+  background: linear-gradient(
+    180deg,
+    var(--theme-primary-50) 30%,
+    var(--theme-primary-100) 100%
+  ); */
+
+  .card-header {
+    padding: #{$spacing * 2} #{$spacing * 4};
+    border-bottom: 1px solid var(--theme-primary-700);
+    border-top-left-radius: var(--theme-border-radius);
+    border-top-right-radius: var(--theme-border-radius);
+    background-color: var(--theme-primary-600);
+    color: var(--theme-primary-contrast-600);
+    font-family: Open Sans, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 2rem;
+  }
+
+  .card-body {
+    flex: 1;
+    -ms-flex: 1 1 auto;
+    overflow: auto;
+    padding: 16px 24px;
+    position: relative;
+    color: var(--theme-primary-contrast-50);
+    font-weight: 400;
+  }
+  .card-footer {
+    // padding: 16px 24px;
+    @include padding(16px, 24px, 16px, 24px);
+    border-top: 1px solid var(--theme-primary-700);
+    color: var(--theme-primary-A700);
+    font-style: italic;
+  }
+}
+.card.secondary {
+  // border: 0.0625rem solid var(--theme-secondary-700);
+  background: var(--theme-secondary-50);
+  background: linear-gradient(
+    180deg,
+    var(--theme-secondary-50) 75%,
+    var(--theme-secondary-200) 100%
+  );
+
+  .card-header {
+    border-bottom: 1px solid var(--theme-secondary-700);
+    background-color: var(--theme-secondary-600);
+    color: var(--theme-secondary-contrast-600);
+  }
+  .card-body {
+    color: var(--theme-secondary-contrast-50);
+  }
+  .card-footer {
+    border-top: 1px solid var(--theme-secondary-700);
+    color: var(--theme-secondary-A700);
+  }
+}

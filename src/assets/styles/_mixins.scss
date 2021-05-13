@@ -1,0 +1,21 @@
+@mixin transform($property) {
+    -webkit-transform: $property;
+    -ms-transform: $property;
+    transform: $property;
+  }
+  @mixin transition($args: all 0.3s ease 0s) {
+    -webkit-transition: $args;
+       -moz-transition: $args;
+         -o-transition: $args;
+            transition: $args;
+  }
+  @mixin font-line-height($fontSize,$lineHeight:$fontSize) {
+    font-size: $fontSize;
+    line-height: $lineHeight;
+  }
+  @mixin border-color($size,$color) {
+    border: $size solid $color;
+  }
+  @mixin reset-border {
+      border: 0px none;
+  }

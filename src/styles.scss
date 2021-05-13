@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
+@import "./../node_modules/flexboxgrid/css/flexboxgrid.min.css";
+@import "../src/assets/styles/variables";
+@import "../src/assets/styles/cards";
+@import "../src/assets/styles/buttons";
+@import "../src/assets/styles/switch";
+// default colors
+body {
+  background-color: var(--theme-body-background-color);
+  color: var(--theme-font-color);
+}
+* {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.Picker input {
+  background-color: var(--theme-primary-500);
+  color: var(--theme-primary-contrast-500);
+}
+.PickerSec input {
+  background-color: var(--theme-secondary-500);
+  color: var(--theme-secondary-contrast-500);
+}
