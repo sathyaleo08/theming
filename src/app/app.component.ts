@@ -95,28 +95,28 @@ export class AppComponent {
     document.documentElement.style.setProperty("--theme-font-color", "#1f1f1f");
     document.documentElement.style.setProperty("--theme-border-radius", "8px");
   }
-  generateJSON() {
-    const sampleJSON = [];
-    const styleObj = document.documentElement.style;
-    for (var e in styleObj) {
-      if (styleObj[e] != null) {
-        const keyName = styleObj[e].toString();
-        if (keyName && keyName?.indexOf("--theme-") > -1) {
-          const value = getComputedStyle(
-            document.documentElement
-          ).getPropertyValue(keyName);
-          let sampleObj = {};
-          sampleObj[keyName] = value;
-          sampleJSON.push(sampleObj);
-        }
-      }
-    }
-    sampleJSON.pop();
-    console.log("");
-    console.log(sampleJSON);
-    this.saveJSON(JSON.stringify(sampleJSON), "config.json");
+  getStyleObj() {
+    const cssText = document.documentElement.style.cssText;
+    var cssTxt = cssText.replace(/\/\*(.|\s)*?\*\//g, " ").replace(/\s+/g, " ");
+    var style = {},
+      [, ruleName, rule] = cssTxt.match(/ ?(.*?) ?{([^}]*)}/) || [, , cssTxt];
+    var cssToJs = (s) =>
+      s.replace(/\W+\w/g, (match) => match.slice(-1).toUpperCase());
+    var properties = rule
+      .split(";")
+      .map((o) => o.split(":").map((x) => x && x.trim()));
+    for (var [property, value] of properties) style[property] = value;
+    return style;
+    // return { cssText, ruleName, style };
   }
-  saveJSON(data, filename) {
+  generateTokenObj() {
+    let sampleObj = {};
+    const newSampleObj = this.getStyleObj();
+    sampleObj["custom-properties"] = newSampleObj;
+    console.log(sampleObj);
+    this.saveTokenObj(JSON.stringify(sampleObj), "config.json");
+  }
+  saveTokenObj(data, filename) {
     var a = document.createElement("a");
     a.setAttribute(
       "href",
@@ -174,7 +174,7 @@ export class AppComponent {
       threshold: 128,
       showContrastText: true,
     });
-    this.primartPaletteMater = this.primaryMaterColor.palette.analogous.primary;
+    this.primartPaletteMater = this.primaryMaterColor.palette.primary;
     this.secPaletteMater = this.primaryMaterColor.palette.analogous.secondary;
     console.log(this.primaryMaterColor);
     for (var e in this.primartPaletteMater) {

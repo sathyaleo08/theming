@@ -6,8 +6,8 @@ gulp.task("css", async () => {
     postcss([
       postcssCustomProperties({
         preserve: false,
-        importFrom: ["config.js", "config.json"],
-        exportTo: "variable.css",
+        importFrom: ["./config.json"],
+        exportTo: "./src/assets/styles/variable.css",
       }),
     ])
   );
