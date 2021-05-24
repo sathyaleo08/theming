@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+} from "@angular/core";
 import Matercolor from "matercolors"; // to generate palette
 import tinycolor from "tinycolor2"; // to create colors
 import ColorCombos from "color-combos"; //for color combo assesability
@@ -11,6 +16,8 @@ import {
   FormBuilder,
 } from "@angular/forms";
 import { ConditionalExpr } from "@angular/compiler";
+import { FontloaderService } from "./typography/fontloader.service";
+import { fromEvent } from "rxjs";
 
 // declare const writeJsonFile: any;
 // declare const tinycolor: any;
@@ -28,7 +35,7 @@ export interface Color {
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ["./app.component.scss"],
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = "eva-nebular";
   primaryPaletterArr = [];
   secPaletterArr = [];
@@ -38,13 +45,14 @@ export class AppComponent {
   secPaletteMater: any;
 
   // Custom palette generator
-  primaryColor = "#3171e0";
-  primaryTextColor;
+  primaryColor: string = "#3171e0";
   primaryColorPalette: Color[] = [];
-  secondaryColor = "#3dc2ff";
+  secondaryColor: string = "#3dc2ff";
   secondaryColorPalette: Color[] = [];
-  backgroundColor = "#000000";
-
+  backgroundColor: string = "#ebebeb";
+  bodyFontColor: string = "#1f1f1f";
+  accessibility: any;
+  contrast: any;
   form: FormGroup;
 
   /* form = new FormGroup({
@@ -72,7 +80,29 @@ export class AppComponent {
   };
 
   isFontsLoaded = false;
-  constructor(fb: FormBuilder) {
+
+  selectedheaderFont: string = "Raleway";
+  selectedBodyFont: string = "Roboto";
+  headerFonts = [
+    "Open Sans Condensed",
+    "Oswald",
+    "Montserrat",
+    "Raleway",
+    "Playfair Display",
+    "Fjalla One",
+    "Alegreya",
+  ];
+  bodyfonts = [
+    "Open Sans",
+    "EB Garamond",
+    "Merriweather",
+    "Roboto",
+    "Source Sans Pro",
+    "Roboto Slab",
+    "Noto Sans",
+    "Lato",
+  ];
+  constructor(fb: FormBuilder, private fontService: FontloaderService) {
     this.generateColorCombo();
 
     this.generatePrimaryPalette();
@@ -86,14 +116,52 @@ export class AppComponent {
     this.form = fb.group({
       variant: ["primary", Validators.required],
     });
+    // Get the element with id="defaultOpen" and click on it
+    // document.getElementById("defaultOpen").click();
+    this.checkColorCombo();
+  }
+  ngAfterViewInit() {
+    fromEvent(document.querySelectorAll(".accordion"), "click").subscribe(
+      (event) => {
+        const currentElm: HTMLButtonElement = event.target as HTMLButtonElement;
+        currentElm.classList.toggle("active");
+        var panel = currentElm.nextElementSibling as HTMLDivElement;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      }
+    );
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
   }
   setBGandFontColor() {
     document.documentElement.style.setProperty(
-      "--theme-body-background-color",
-      "#ebebeb"
+      "--theme-background-color",
+      this.backgroundColor
     );
-    document.documentElement.style.setProperty("--theme-font-color", "#1f1f1f");
-    document.documentElement.style.setProperty("--theme-border-radius", "8px");
+    document.documentElement.style.setProperty(
+      "--theme-body-font-color",
+      this.bodyFontColor
+    );
+    document.documentElement.style.setProperty(
+      "--theme-border-radius",
+      this.sliderValue + "px"
+    );
+    document.documentElement.style.setProperty(
+      "--theme-spacing",
+      this.sliderValueSpacing + "px"
+    );
+    document.documentElement.style.setProperty(
+      "--theme-body-font",
+      this.selectedBodyFont
+    );
+    document.documentElement.style.setProperty(
+      "--theme-header-font",
+      this.selectedheaderFont
+    );
   }
   getStyleObj() {
     const cssText = document.documentElement.style.cssText;
@@ -195,14 +263,78 @@ export class AppComponent {
     this.secondaryColor = e;
     this.generateSecondaryPalette();
   }
-  switchDarkMode(e) {
-    const bgColor = e.target.checked ? "#1f1f1f" : "#ebebeb";
-    const fontColor = !e.target.checked ? "#1f1f1f" : "#ebebeb";
-    document.documentElement.style.setProperty(
-      "--theme-body-background-color",
-      bgColor
+  checkColorCombo() {
+    const sampleCombo = ColorCombos(
+      [this.backgroundColor, this.bodyFontColor],
+      { compact: true }
     );
-    document.documentElement.style.setProperty("--theme-font-color", fontColor);
+    this.accessibility = sampleCombo[0].combinations[0].accessibility;
+    this.contrast = sampleCombo[0].combinations[0].contrast;
+    console.log(this.accessibility);
+    console.log(this.contrast);
+    console.log(sampleCombo);
+  }
+  backgroundColorChange(e) {
+    document.documentElement.style.setProperty(
+      "--theme-background-color",
+      this.backgroundColor
+    );
+    this.checkColorCombo();
+  }
+  bodyFontColorChange(e) {
+    document.documentElement.style.setProperty(
+      "--theme-body-font-color",
+      this.bodyFontColor
+    );
+    this.checkColorCombo();
+  }
+  setComboColor() {
+    document.documentElement.style.setProperty(
+      "--theme-body-font-color",
+      this.bodyFontColor
+    );
+    document.documentElement.style.setProperty(
+      "--theme-background-color",
+      this.backgroundColor
+    );
+  }
+  switchDarkMode(e) {
+    var body = document.body;
+    e.target.checked
+      ? body.classList.add("darkMode")
+      : body.classList.remove("darkMode");
+  }
+  onOptionsSelected() {
+    console.log(this.selectedheaderFont);
+    this.fontService.loadFont2(this.selectedheaderFont);
+    document.documentElement.style.setProperty(
+      "--theme-body-font",
+      this.selectedheaderFont
+    );
+    // this.filtered = this.stat.filter((t) => t.value == this.selected);
+  }
+  setFont(type) {
+    const fontProperty =
+      type == "body" ? "--theme-body-font" : "--theme-header-font";
+    const font =
+      type == "body" ? this.selectedBodyFont : this.selectedheaderFont;
+    this.fontService.loadFont2(font);
+    document.documentElement.style.setProperty(fontProperty, font);
+    // this.filtered = this.stat.filter((t) => t.value == this.selected);
+  }
+  openCity(elmnt, cityName) {
+    elmnt = elmnt.target;
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].style.backgroundColor = "";
+    }
+    document.getElementById(cityName).style.display = "block";
+    elmnt.style.backgroundColor = "#007bff";
   }
 }
 
@@ -219,8 +351,8 @@ function computeColors(hex: string): Color[] {
     getColorObject(tinycolor(hex).darken(18), "800"),
     getColorObject(tinycolor(hex).darken(24), "900"),
     getColorObject(tinycolor(hex).lighten(50).saturate(30), "A100"),
-    getColorObject(tinycolor(hex).lighten(30).saturate(30), "A200"),
-    getColorObject(tinycolor(hex).lighten(10).saturate(15), "A400"),
+    //  getColorObject(tinycolor(hex).lighten(30).saturate(30), "A200"),
+    // getColorObject(tinycolor(hex).lighten(10).saturate(15), "A400"),
     getColorObject(tinycolor(hex).lighten(5).saturate(5), "A700"),
   ];
 }

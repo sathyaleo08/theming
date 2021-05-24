@@ -1,0 +1,71 @@
+// Accordion
+@import "variables";
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+  margin: 0px;
+  border-radius: 0px;
+  font-family: arial;
+  padding: 3px 10px;
+  min-width: 64px;
+  line-height: 36px;
+  box-sizing: border-box;
+  box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%),
+    0 1px 5px 0 rgb(0 0 0 / 12%);
+}
+
+.active,
+.accordion:hover {
+  background-color: #ccc;
+}
+
+.accordion:after {
+  content: "\002B";
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  padding: 0 10px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+.Picker {
+  padding: 10px 0px;
+}
+.colorSampler {
+  height: 24px;
+  width: 24px;
+  display: inline-block;
+  position: relative;
+  top: 6px;
+  margin: 0 5px 0 0;
+  border: 1px solid rgb(255 255 255);
+}
+.colorSampler.primary {
+  background-color: var(--theme-primary-500);
+}
+.colorSampler.secondary {
+  background-color: var(--theme-secondary-500);
+}
+.colorSampler.background {
+  background-color: var(--theme-background-color);
+}
+.colorSampler.fontColor {
+  background-color: var(--theme-body-font-color);
+}

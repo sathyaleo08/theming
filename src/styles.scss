@@ -5,25 +5,61 @@
 @import "../src/assets/styles/cards";
 @import "../src/assets/styles/buttons";
 @import "../src/assets/styles/switch";
+@import "../src/assets/styles/accordion";
 // default colors
 body {
-  background-color: var(--theme-body-background-color);
-  color: var(--theme-font-color);
+  background-color: var(--theme-background-color);
+  color: var(--theme-body-font-color);
+  font-size: 16px;
+  font-weight: 400;
+}
+body.darkMode {
+  background-color: var(--theme-body-font-color);
+  color: var(--theme-background-color);
   font-size: 16px;
   font-weight: 400;
 }
 * {
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--theme-body-font);
 }
 :is(h1, h2, h3, h4, h5, h6) {
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--theme-header-font);
   font-weight: 700;
 }
-.Picker input {
+html,
+body {
+  height: 100%;
+}
+.Picker input.primary {
   background-color: var(--theme-primary-500);
   color: var(--theme-primary-contrast-500);
 }
-.PickerSec input {
+.Picker input.secondary {
   background-color: var(--theme-secondary-500);
   color: var(--theme-secondary-contrast-500);
+}
+
+.PickerBg input {
+  background-color: var(--theme-background-color);
+  color: var(--theme-body-font-color);
+  border: 1px solid var(--theme-body-font-color) !important;
+  width: 100%;
+}
+.PickerFont input {
+  background-color: var(--theme-body-font-color);
+  color: var(--theme-background-color);
+  border: 1px solid var(--theme-background-color) !important;
+  width: 100%;
+}
+
+.topBar {
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  form {
+    float: left;
+  }
+  .darkSpan {
+    line-height: 24px;
+    margin: 0 0 0 10px;
+  }
 }

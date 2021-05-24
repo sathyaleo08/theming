@@ -12,10 +12,10 @@
 
 .card {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-  background-color: var(--light-bg);
+  background-color: var(--theme-background-color);
   border-radius: var(--theme-border-radius);
   // border: 0.0625rem solid var(--theme-primary-700);
-  font-family: Open Sans, sans-serif;
+  font-family: var(--theme-body-font);
   font-size: 0.9375rem;
   font-weight: 400;
   line-height: 1.25rem;
@@ -34,7 +34,7 @@
     border-top-right-radius: var(--theme-border-radius);
     background-color: var(--theme-primary-600);
     color: var(--theme-primary-contrast-600);
-    font-family: Open Sans, sans-serif;
+    font-family: var(--theme-header-font);
     font-size: 1.5rem;
     font-weight: 300;
     line-height: 2rem;
@@ -59,11 +59,11 @@
 .card.secondary {
   // border: 0.0625rem solid var(--theme-secondary-700);
   background: var(--theme-secondary-50);
-  background: linear-gradient(
+  /*  background: linear-gradient(
     180deg,
     var(--theme-secondary-50) 75%,
     var(--theme-secondary-200) 100%
-  );
+  ); */
 
   .card-header {
     border-bottom: 1px solid var(--theme-secondary-700);
